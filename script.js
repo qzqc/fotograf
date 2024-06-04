@@ -3,5 +3,5 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const image = document.getElementById('display-image');
-    image.src = 'assets/1.jpg';
+    image.src = 'assets/IMG_3256.png';
 });
