@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const image = document.getElementById('display-image');
-    const imagePath = 'assets/';
+    const imageContainer = document.getElementById('display-image');
+    const imagePath = 'assets/'; // assets klasöründeki dosyaların yolu
     
     // assets klasöründeki ilk dosyayı göstermek için
     fetch(imagePath)
@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(blob => {
             const imageUrl = URL.createObjectURL(blob);
-            image.src = imageUrl;
+            const imageElement = document.createElement('img');
+            imageElement.src = imageUrl;
+            imageContainer.appendChild(imageElement);
         });
 });
