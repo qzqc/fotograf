@@ -1,7 +1,18 @@
-// Kodu güncelledik, şifre giriş ekranını kaldırdık
-// Sadece assets/1.jpg dosyasını görüntüleyecek şekilde ayarladık
-
 document.addEventListener('DOMContentLoaded', function() {
     const image = document.getElementById('display-image');
-    image.src = 'assets/IMG_4226.jpeg';
+    const imagePath = 'assets/';
+    
+    // assets klasöründeki ilk dosyayı göstermek için
+    fetch(imagePath)
+        .then(response => {
+            if (response.ok) {
+                return response.blob();
+            } else {
+                console.error('Dosya bulunamadı.');
+            }
+        })
+        .then(blob => {
+            const imageUrl = URL.createObjectURL(blob);
+            image.src = imageUrl;
+        });
 });
