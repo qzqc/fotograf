@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const fileList = document.getElementById('file-list');
-    const repo = 'kullaniciadi/repoadi'; // GitHub kullanıcı adı ve depo adı
+    const repo = 'qzqc/fotograf'; // GitHub kullanıcı adı ve depo adı
     const path = 'assets';
 
     fetch(`https://api.github.com/repos/${repo}/contents/${path}`)
