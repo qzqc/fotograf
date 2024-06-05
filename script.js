@@ -1,20 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const imageContainer = document.getElementById('display-image');
-    const imagePath = 'assets/'; // assets klasöründeki dosyaların yolu
-    
-    // assets klasöründeki ilk dosyayı göstermek için
-    fetch(imagePath)
-        .then(response => {
-            if (response.ok) {
-                return response.blob();
-            } else {
-                console.error('Dosya bulunamadı.');
-            }
+    const fileList = document.getElementById('file-list');
+    const repo = 'kullaniciadi/repoadi'; // GitHub kullanıcı adı ve depo adı
+    const path = 'assets';
+
+    fetch(`https://api.github.com/repos/${repo}/contents/${path}`)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(file => {
+                if (file.type === 'file') {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = file.download_url;
+                    link.textContent = file.name;
+                    listItem.appendChild(link);
+                    fileList.appendChild(listItem);
+                }
+            });
         })
-        .then(blob => {
-            const imageUrl = URL.createObjectURL(blob);
-            const imageElement = document.createElement('img');
-            imageElement.src = imageUrl;
-            imageContainer.appendChild(imageElement);
-        });
+        .catch(error => console.error('Hata:', error));
 });
